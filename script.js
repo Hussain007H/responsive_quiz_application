@@ -26,29 +26,33 @@ function showScores() {
 }
 
 function showQuestion() {
-  let q = questions[current];
+  const q = questions[current];
   questionText.innerText = q.question;
   optionsBox.innerHTML = "";
 
   q.options.forEach(opt => {
-    let btn = document.createElement("button");
-    btn.className = "btn btn-outline-primary d-block mb-2";
+    const btn = document.createElement("button");
+    btn.className = "btn btn-outline-primary";
     btn.innerText = opt;
 
-    
-    if (answers[current] === opt) btn.classList.add("active");
+    if (answers[current] === opt) btn.classList.add("selected");
+
     btn.onclick = () => {
       answers[current] = opt;
-      Array.from(optionsBox.children).forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+      Array.from(optionsBox.children).forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
     };
 
     optionsBox.appendChild(btn);
   });
 
-  document.getElementById("prev-btn").style.display = current ? "inline-block" : "none";
-  document.getElementById("next-btn").style.display = current < questions.length - 1 ? "inline-block" : "none";
+  document.getElementById("prev-btn").style.display = current === 0 ? "none" : "inline-block";
+  document.getElementById("next-btn").style.display = current === questions.length - 1 ? "none" : "inline-block";
   document.getElementById("submit-btn").classList.toggle("d-none", current !== questions.length - 1);
+}
+
+function shuffle(arr) {
+  return arr.sort(() => Math.random() - 0.5);
 }
 
 document.getElementById("start-btn").onclick = () => {
@@ -61,14 +65,14 @@ document.getElementById("next-btn").onclick = () => { current++; showQuestion();
 document.getElementById("prev-btn").onclick = () => { current--; showQuestion(); };
 
 document.getElementById("submit-btn").onclick = () => {
-  let score = questions.filter((q,i) => q.answer === answers[i]).length;
+  const score = questions.filter((q,i) => q.answer === answers[i]).length;
 
   scoreSpan.innerText = `${score} / ${questions.length}`;
   feedback.innerText = score === questions.length ? "Excellent!" :
                        score >= questions.length/2 ? "Good job!" : "Keep practicing!";
 
   localStorage.setItem("lastScore", score);
-  let best = localStorage.getItem("bestScore");
+  const best = localStorage.getItem("bestScore");
   if (!best || score > best) localStorage.setItem("bestScore", score);
 
   quizPage.classList.add("d-none");
@@ -78,6 +82,5 @@ document.getElementById("submit-btn").onclick = () => {
 
 document.getElementById("retry-btn").onclick = () => location.reload();
 
-function shuffle(arr) {
-  return arr.sort(() => Math.random() - 0.5);
-}
+
+
