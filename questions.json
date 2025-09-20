@@ -1,0 +1,57 @@
+[
+  {
+    "question": "What does HTML stand for?",
+    "options": ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language", "Hyperlinking Text Mark Language"],
+    "answer": "Hyper Text Markup Language"
+  },
+  {
+    "question": "What does CSS stand for?",
+    "options": ["Cascading Style Sheets", "Colorful Style Sheets", "Creative Style Sheets", "Computer Style Sheets"],
+    "answer": "Cascading Style Sheets"
+  },
+  {
+    "question": "What does JS or JavaScript stand for?",
+    "options": ["Just Script", "JavaScript", "Java Source", "Joint Script"],
+    "answer": "JavaScript"
+  },
+  {
+    "question": "Which HTML tag is used to create a hyperlink?",
+    "options": ["<a>", "<link>", "<href>", "<url>"],
+    "answer": "<a>"
+  },
+  {
+    "question": "Which HTML tag is used to create a paragraph?",
+    "options": ["<p>", "<para>", "<text>", "<paragraph>"],
+    "answer": "<p>"
+  },
+  {
+    "question": "Which property is used in CSS to change text color?",
+    "options": ["color", "font-color", "text-color", "font-style"],
+    "answer": "color"
+  },
+  {
+    "question": "Which property is used in CSS to change the background color?",
+    "options": ["background-color", "color", "bgcolor", "background-style"],
+    "answer": "background-color"
+  },
+  {
+    "question": "Which symbol is used to select an ID in CSS?",
+    "options": ["#", ".", "*", "@"],
+    "answer": "#"
+  },
+  {
+    "question": "Which symbol is used to select an class in CSS?",
+    "options": ["#", ".", "*", "@"],
+    "answer": "."
+  },
+  {
+    "question": "Which JavaScript function is used to print something to the console?",
+    "options": ["console.log()", "print()", "alert()", "document.write()"],
+    "answer": "console.log()"
+  },
+  {
+    "question": "Which tag is used to include JavaScript in HTML?",
+    "options": ["<script>", "<js>", "<javascript>", "<code>"],
+    "answer": "<script>"
+  }
+]
