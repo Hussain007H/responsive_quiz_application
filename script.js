@@ -17,6 +17,7 @@ fetch("questions.json")
     showScores();
   });
 
+// Show last and best score
 function showScores() {
   document.getElementById("lastscore").innerText =
     localStorage.getItem("lastScore") ? `Last: ${localStorage.getItem("lastScore")}` : "";
@@ -24,18 +25,26 @@ function showScores() {
     localStorage.getItem("bestScore") ? `Best: ${localStorage.getItem("bestScore")}` : "";
 }
 
+// Show current question
 function showQuestion() {
   let q = questions[current];
   questionText.innerText = q.question;
   optionsBox.innerHTML = "";
+
   q.options.forEach(opt => {
     let btn = document.createElement("button");
     btn.className = "btn btn-outline-primary d-block mb-2";
     btn.innerText = opt;
 
+    // highlight if already chosen
     if (answers[current] === opt) btn.classList.add("active");
 
-    btn.onclick = () => { answers[current] = opt; showQuestion(); };
+    btn.onclick = () => {
+      answers[current] = opt;
+      Array.from(optionsBox.children).forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    };
+
     optionsBox.appendChild(btn);
   });
 
@@ -44,15 +53,18 @@ function showQuestion() {
   document.getElementById("submit-btn").classList.toggle("d-none", current !== questions.length - 1);
 }
 
+// Start quiz
 document.getElementById("start-btn").onclick = () => {
   startPage.classList.add("d-none");
   quizPage.classList.remove("d-none");
   showQuestion();
 };
 
+// Next / Previous
 document.getElementById("next-btn").onclick = () => { current++; showQuestion(); };
 document.getElementById("prev-btn").onclick = () => { current--; showQuestion(); };
 
+// Submit quiz
 document.getElementById("submit-btn").onclick = () => {
   let score = questions.filter((q,i) => q.answer === answers[i]).length;
   scoreSpan.innerText = `${score} / ${questions.length}`;
@@ -67,7 +79,5 @@ document.getElementById("submit-btn").onclick = () => {
   resultPage.classList.remove("d-none");
 };
 
-
+// Retry quiz
 document.getElementById("retry-btn").onclick = () => location.reload();
-
-
