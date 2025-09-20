@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid py-5">
+     <div id="startpage" class="text-center">
+        <h1 class="text-primary mb-3">Welcome to the Quiz</h1>
+        <p class="mb-3">Test your brain! Answer the questions and see how you score!</p>
+        <p id="lastscore"></p>
+        <p id="bestscore"></p>
+        <button id="start-btn" class="btn btn-primary btn-lg">Start Quiz</button>
+    </div>
+
+     <div id="quiz-page" class="d-none">
+        <div id="question" class="my-4">
+            <h4 id="question-text"></h4>
+            <div id="options" class="my-3"></div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <button id="prev-btn" class="btn btn-secondary">Previous</button>
+            <button id="next-btn" class="btn btn-secondary">Next</button>
+            <button id="submit-btn" class="btn btn-success d-none">Submit</button>
+        </div>
+    </div>
+     <div id="result-page" class="text-center d-none my-4">
+        <h2>Your Score: <span id="score"></span></h2>
+        <p id="feedback" class="fs-5"></p>
+        <button id="retry-btn" class="btn btn-primary mt-3">Retry Quiz</button>
+    </div>
+  </div>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
