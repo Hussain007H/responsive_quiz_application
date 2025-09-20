@@ -2,7 +2,6 @@ let questions = [];
 let current = 0;
 let answers = [];
 
-// DOM elements
 const startPage = document.getElementById("startpage");
 const quizPage = document.getElementById("quiz-page");
 const resultPage = document.getElementById("result-page");
@@ -11,15 +10,14 @@ const optionsBox = document.getElementById("options");
 const scoreSpan = document.getElementById("score");
 const feedback = document.getElementById("feedback");
 
-// Load questions from JSON
 fetch("questions.json")
   .then(res => res.json())
   .then(data => {
-    questions = shuffle(data);
+    questions = shuffle(data); 
     showScores();
-  });
+  })
+  .catch(err => console.error("Failed to load questions:", err));
 
-// Show last & best scores
 function showScores() {
   document.getElementById("lastscore").innerText =
     localStorage.getItem("lastScore") ? `Last: ${localStorage.getItem("lastScore")}` : "";
@@ -27,7 +25,6 @@ function showScores() {
     localStorage.getItem("bestScore") ? `Best: ${localStorage.getItem("bestScore")}` : "";
 }
 
-// Show current question
 function showQuestion() {
   let q = questions[current];
   questionText.innerText = q.question;
@@ -38,41 +35,38 @@ function showQuestion() {
     btn.className = "btn btn-outline-primary d-block mb-2";
     btn.innerText = opt;
 
+    
     if (answers[current] === opt) btn.classList.add("active");
-
     btn.onclick = () => {
       answers[current] = opt;
-      showQuestion(); // re-render to highlight selection
+      Array.from(optionsBox.children).forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
     };
 
     optionsBox.appendChild(btn);
   });
 
-  // Show/hide navigation
   document.getElementById("prev-btn").style.display = current ? "inline-block" : "none";
   document.getElementById("next-btn").style.display = current < questions.length - 1 ? "inline-block" : "none";
   document.getElementById("submit-btn").classList.toggle("d-none", current !== questions.length - 1);
 }
 
-// Start quiz
 document.getElementById("start-btn").onclick = () => {
   startPage.classList.add("d-none");
   quizPage.classList.remove("d-none");
   showQuestion();
 };
 
-// Navigation
 document.getElementById("next-btn").onclick = () => { current++; showQuestion(); };
 document.getElementById("prev-btn").onclick = () => { current--; showQuestion(); };
 
-// Submit quiz
 document.getElementById("submit-btn").onclick = () => {
   let score = questions.filter((q,i) => q.answer === answers[i]).length;
+
   scoreSpan.innerText = `${score} / ${questions.length}`;
   feedback.innerText = score === questions.length ? "Excellent!" :
-           score >= questions.length/2 ? "Good job!" : "Keep practicing!";
+                       score >= questions.length/2 ? "Good job!" : "Keep practicing!";
 
-  // Save scores
   localStorage.setItem("lastScore", score);
   let best = localStorage.getItem("bestScore");
   if (!best || score > best) localStorage.setItem("bestScore", score);
@@ -82,11 +76,8 @@ document.getElementById("submit-btn").onclick = () => {
   showScores();
 };
 
-// Retry
 document.getElementById("retry-btn").onclick = () => location.reload();
 
-// Shuffle helper
 function shuffle(arr) {
   return arr.sort(() => Math.random() - 0.5);
 }
-
